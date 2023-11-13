@@ -25,9 +25,10 @@
 
     <script>
         document.getElementById("add-user-form").onsubmit = function (event) {
-            // Prevent the default form submit action if the email is already registered
             event.preventDefault();
             var email = document.getElementById('email').value;
+            var password = document.getElementById('new-password').value;
+
             fetch('/api/check-email', {
                 method: 'POST',
                 headers: {
@@ -40,9 +41,28 @@
                     if (data.exists) {
                         alert("Email already registered.");
                     } else {
-                        // If the email is not registered, proceed with the form submission
-                        event.target.submit();
+                        // If the email does not exist, send a POST request to create the new user
+                        return fetch('/api/add-user', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                email: email,
+                                password: password // Ensure the password is securely handled and stored
+                            }),
+                        });
                     }
+                })
+                .then(response => {
+                    if (response && response.ok) {
+                        return response.json();
+                    }
+                    throw new Error('Failed to create user.');
+                })
+                .then(data => {
+                    alert("User successfully added.");
+                    // Optionally redirect the user or clear the form
                 })
                 .catch((error) => {
                     console.error('Error:', error);
