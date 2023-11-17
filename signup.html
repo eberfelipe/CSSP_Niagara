@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Good Luck College</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="form-container">
+        <h1>Sign Up for "Good Luck" College</h1>
+        <form id="signup-form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required><br>
+
+            <label for="reason">Why did you choose to study at "Good Luck"?</label>
+            <select id="reason" name="reason" required>
+                <option value="deceived">Because you were deceived.</option>
+                <option value="parachuted">Because you landed here by parachute.</option>
+                <option value="affordable">Because it's all you can afford.</option>
+                <option value="suffer">Because you like to suffer.</option>
+            </select><br>
+
+            <label for="learning-method">Choose your learning method:</label>
+            <select id="learning-method" name="learning-method" required>
+                <option value="crystal-ball">Crystal Ball</option>
+                <option value="youtube-videos">Free YouTube Tutorial Videos</option>
+                <option value="wrong-ai">AI's that give you the wrong answer.</option>
+                <option value="all">All of the above.</option>
+            </select><br>
+
+            <button type="button" id="submit-btn">Submit</button>
+            <button type="button" id="cancel-btn">Cancel</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('submit-btn').addEventListener('click', function () {
+            const confirmation = confirm("Are you sure? There's still time to back out!");
+            if (confirmation) {
+                // Aqui você adicionaria o código para enviar os dados com um PUT request
+                alert("Your registration number will be provided soon."); // Placeholder for actual PUT request
+            }
+        });
+
+        document.getElementById('cancel-btn').addEventListener('click', function () {
+            const choice = confirm("Smart choice!");
+            if (choice) {
+                window.location.href = 'index.html'; // Ajuste o caminho se necessário
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Service Request</title>
+</head>
+
+<body>
+    <div class="page">
+        <nav>
+            <a id="logo" href="index.html">
+                <img src="logo.svg" alt="Train.me" />
+            </a>
+            <ul>
+                <li><a href="newsletter.html">Newsletter</a></li>
+            </ul>
+        </nav>
+        <h2>Fill in your details and our professionals will contact you as soon as possible.</h2>
+
+        <form id="requestForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" name="phone" required>
+
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required>
+
+            <label for="weight">Weight:</label>
+            <input type="number" id="weight" name="weight" step="0.01" required>
+
+            <button type="submit">Send</button>
+        </form>
+
+        <div class="action-buttons">
+            <button id="trackRequest">Track Request</button>
+            <button id="updateRequest">Update Request</button>
+            <button id="cancelRequest">Cancel Request</button>
+        </div>
+    </div>
+</body>
+
+</html>

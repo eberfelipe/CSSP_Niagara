@@ -2,44 +2,55 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
-    <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>workout me</title>
+  <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;700&family=Open+Sans:wght@400;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-    <div class="login-container">
-        <h2>Login</h2>
-        <form id="login-form">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
+  <div class="page">
+    <nav>
+      <a id="logo" href="index.html">
+        <img src="logo.svg" alt="Train.me" />
+      </a>
+      <ul>
+        <li><a href="newsletter.html">Newsletter</a></li>
+      </ul>
+    </nav>
+    <main>
+      <section class="text">
+        <h1>Exclusive <span>workouts</span> just for you!</h1>
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
+        <p>
+          We create <strong>exclusive and unique workouts for you.</strong>
+          <br />
+          Invest in your body and
+          <strong>achieve much more performance</strong> and
+          <br />
+          quality of life.
+        </p>
 
-            <button type="submit" class="btn">Login</button>
-        </form>
-        <a href="add_user.html" class="btn">Add User</a><br><br>
-        <a href="forgot_password.html">Forgot Password?</a>
-    </div>
+        <a href="form.html" class="start-now-button">
+          <img src="whats.svg" alt="WhatsApp icon" />
+          Start now
+        </a>
+      </section>
 
-    <script>
-        // JavaScript para validação do formulário
-        document.getElementById('login-form').addEventListener('submit', function (e) {
-            e.preventDefault();
+      <img src="img.png" alt="Drawing of a woman skipping rope in a gym" />
+    </main>
+    <footer>
+      contact us on Instagram
+      <a href="https://instagram.com/workouts_me123" target="_blank">@workouts.me</a>
+    </footer>
+  </div>
 
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-
-            if (!username || !password) {
-                alert('Please fill in all fields.');
-                return;
-            }
-
-
-        });
-    </script>
+  <img id="balls" src="balls.svg" alt="Green decorative balls in the bottom right corner of the page" />
 </body>
 
 </html>
