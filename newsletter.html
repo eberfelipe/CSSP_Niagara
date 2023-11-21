@@ -21,6 +21,10 @@
         <h2>Enter your email to receive our latest news.</h2>
 
         <form id="newsletterForm">
+
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required>
 
@@ -32,6 +36,55 @@
             <button id="cancelSubscription">Cancel Subscription</button>
         </div>
     </div>
+
+    <script>
+        function subscribe(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+
+            fetch('/subscribe', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name, email })
+            })
+                .then(response => response.text())
+                .then(data => alert(data))
+                .catch(error => console.error('Error:', error));
+        }
+
+        document.getElementById('newsletterForm').addEventListener('submit', subscribe);
+
+        function confirmSubscription() {
+            // Supondo que você precise do e-mail para confirmar a inscrição
+            const email = document.getElementById('email').value;
+
+            fetch(`/confirm-subscription?email=${email}`)
+                .then(response => response.text())
+                .then(data => alert(data))
+                .catch(error => console.error('Error:', error));
+        }
+
+        document.getElementById('confirmSubscription').addEventListener('click', confirmSubscription);
+
+        function cancelSubscription() {
+            const email = document.getElementById('email').value;
+
+            fetch(`/cancel-subscription?email=${email}`, {
+                method: 'DELETE'
+            })
+                .then(response => response.text())
+                .then(data => alert(data))
+                .catch(error => console.error('Error:', error));
+        }
+
+        document.getElementById('cancelSubscription').addEventListener('click', cancelSubscription);
+
+    </script>
+
 </body>
 
 </html>

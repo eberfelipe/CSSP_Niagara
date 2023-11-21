@@ -20,7 +20,7 @@
         </nav>
         <h2>Fill in your details and our professionals will contact you as soon as possible.</h2>
 
-        <form id="requestForm">
+        <form id="requestForm" onsubmit="handleSubmit(event)">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
 
@@ -42,6 +42,107 @@
             <button id="cancelRequest">Cancel Request</button>
         </div>
     </div>
+
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault(); // Impede o comportamento padrão do formulário
+
+            const formData = {
+                name: document.getElementById('name').value,
+                phone: document.getElementById('phone').value,
+                age: document.getElementById('age').value,
+                weight: document.getElementById('weight').value,
+            };
+
+            fetch('/submit-form', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            })
+                .then(response => response.text())
+                .then(data => {
+                    alert(data);
+                    window.location.href = '/';
+                })
+                .catch((error) => console.error('Error:', error));
+        }
+
+        function trackRequest() {
+            const phone = document.getElementById('phone').value; // Supondo que 'phone' é o ID do campo de telefone no seu formulário
+
+            fetch(`/track-request?phone=${phone}`)
+                .then(response => response.text())
+                .then(data => alert(data))
+                .catch(error => console.error('Error:', error));
+        }
+
+        // Adicione um ouvinte de evento ao botão Track Request
+        document.getElementById('trackRequest').addEventListener('click', trackRequest);
+
+        document.getElementById('phone').addEventListener('input', function (e) {
+            var x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
+            e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+        });
+
+        function updateRequest() {
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const age = document.getElementById('age').value;
+            const weight = document.getElementById('weight').value;
+
+            if (!name || !phone || !age || !weight) {
+                alert('Please fill in all fields.');
+                return;
+            }
+
+            const formData = { name, phone, age, weight };
+
+            fetch('/update-request', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            })
+                .then(response => response.text())
+                .then(data => {
+                    alert(data);
+                })
+                .catch((error) => console.error('Error:', error));
+        }
+
+        document.getElementById('updateRequest').addEventListener('click', updateRequest);
+
+        function deleteRequest() {
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const age = document.getElementById('age').value;
+            const weight = document.getElementById('weight').value;
+
+            if (!name || !phone || !age || !weight) {
+                alert('Please fill in all fields.');
+                return;
+            }
+
+            fetch(`/delete-request?phone=${phone}`, {
+                method: 'DELETE'
+            })
+                .then(response => response.text())
+                .then(data => {
+                    alert(data);
+                    if (data === 'Record deleted successfully.') {
+                        // Limpe os campos do formulário ou redirecione, se necessário
+                        window.location.href = '/';
+                    }
+                })
+                .catch((error) => console.error('Error:', error));
+        }
+
+        document.getElementById('cancelRequest').addEventListener('click', deleteRequest);
+
+    </script>
 </body>
 
 </html>
